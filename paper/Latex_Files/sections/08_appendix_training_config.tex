@@ -1,0 +1,48 @@
+\appendices
+\section{Training and LoRA Configuration}
+\label{app:training-config}
+
+This appendix summarizes the training and LoRA settings used in the experiments. The same general configuration was used across the lightweight LLMs, with the model checkpoint changed for each experiment.
+
+\begin{table}[H]
+\centering
+\caption{Training and Optimization Configuration}
+\label{tab:training-config}
+\begin{tabular}{ll}
+\hline
+Setting & Value \\
+\hline
+Seed & 42 \\
+Maximum input length & 512 tokens \\
+Number of epochs & 3 \\
+Learning rate & $2 \times 10^{-4}$ \\
+Training batch size & 16 \\
+Evaluation batch size & 32 \\
+Gradient accumulation steps & 2 \\
+Weight decay & 0.01 \\
+Warmup ratio & 0.03 \\
+Learning-rate scheduler & Linear \\
+Maximum gradient norm & 1.0 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Task and LoRA Configuration}
+\label{tab:lora-config}
+\begin{tabular}{ll}
+\hline
+Setting & Value \\
+\hline
+Task setup & Binary sequence classification \\
+Output labels & absent, present \\
+Positive class & present \\
+PEFT method & LoRA \\
+LoRA rank & 8 \\
+LoRA alpha & 16 \\
+LoRA dropout & 0.05 \\
+LoRA target modules & \texttt{q\_proj}, \texttt{v\_proj} \\
+\hline
+\end{tabular}
+\end{table}

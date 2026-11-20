@@ -1,0 +1,27 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{Background}
+\label{subsec:background}
+Software projects are growing over time and have multiple developers working on a large codebase. Having inefficient or poor design negatively impacts maintainability and readability which could cost valuable resources like time and money. These are known as code smells, which has been a major ongoing research topic in software engineering. They can be deceptive as code can function correctly because they don’t appear as bugs however they indicate design problems that can make the system hard to interpret, modify, scale, test and evaluate. The early detection of code smells is very important to point out for any needed refactoring and prevent the accumulation of bad code design. 
+Examples of code smells include God Class, where a single class takes on too many responsibilities; Long Method, where a method grows too long and hard to read; Feature Envy, where a method relies more on another class's data than its own; and Data Class, which just holds data but doesn't do anything meaningful with it. These four smells span both class-level and method-level concerns and represent some of the most frequently studied categories in the literature. Detecting code smells matters because they may harm:
+\begin{itemize}
+    \item Maintainability: smelly code is harder to modify without introducing new issues.
+\end{itemize}
+\begin{itemize}
+    \item Readability: developers spend more time understanding poorly structured code.
+\end{itemize}
+\begin{itemize}
+    \item Testability: tightly coupled or overly complex code is difficult to test in isolation.
+\end{itemize}
+
+\subsection{Motivation}
+\label{subsec:motivation}
+Early stages required manual code smell detection which was considered very costly and time-consuming due to the need for experienced developers to review code carefully which doesn’t scale as projects grow in size and complexity. This motivated research into finding automated code smell detection solutions. It started with heuristic-based rules and manual metrics and although it was straightforward, this was very difficult to generalize across different kinds of projects, languages and smell types as well as the need of significant domain expertise.
+With the rise of Artificial Intelligence (AI), Machine learning (ML) and Deep Learning (DL) techniques, code smell detection problems were treated as a classification problem that can learn complex patterns directly from code. More recently, NLP-based models and large language models (LLMs) offered stronger contextual understanding and improved detection performance further.
+Despite these advances, they had a huge limitation which is their high computational cost and deployment complexity. In many real-world environments, running or even accessing LLMs is not feasible, especially where data privacy, limited hardware, or local deployment are required. In recent years, new generations of small light LLMs have become more popular where they are designed to run on standard hardware without requiring intensive resources and costs, yet their effectiveness on code quality tasks such as smell detection remain underexplored.
+
+\subsection{Project Aim}
+\label{subsec:project-aim}
+This paper addresses the gap identified above by investigating whether small, locally deployable LLMs can achieve good performance on code-smell detection after fine-tuning. The main contribution is a comparative analysis showing evidence on how model size and architectural design affect classification performance across different code smell types, and whether small LLMs can be a good alternative to large-scale LLMs or not. This paper focuses on comparing four light LLMs with distinct architectures including Qwen3-0.6B, Qwen3-1.7B, Llama-3.2-1B-Instruct, and Gemma-3-1B-it.
+All models are fine-tuned using LoRA on the MLCQ dataset, a benchmark of approximately ~13,400 manually labeled real-world Java code samples across four smell categories mentioned above. The task is formulated as binary classification, where the model predicts whether a code smell is present or absent for a given code sample and target smell type. The evaluation uses a consistent experimental setup across all models, with present-class F1-score as the primary comparison metric, since the main goal is detecting actual code smells and accuracy alone can be misleading given the class imbalance in the dataset.

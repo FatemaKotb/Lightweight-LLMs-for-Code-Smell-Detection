@@ -1,0 +1,31 @@
+\section{Related Work}
+\label{sec:related-work}
+
+\subsection{Earlier Heuristic-Based Approaches}
+
+Code smell detection focused mainly on heuristic-based techniques and software metrics. These methods identified smells using predefined rules, threshold values, and metric combinations extracted from source code. Rule-based detection became widely used because it was relatively simple to apply and automate. However, the quality of detection often depended on how thresholds were selected and how the rules were designed, which could vary between projects and developers \cite{mesbah2025nlp,zhang2024peftsmells}.
+
+Heuristic-based methods also had difficulty handling the semantic side of source code. In practice, some methods with high complexity values were still easy for developers to read and maintain, while other problematic code fragments were missed because they did not cross predefined metric thresholds. Because of this, rule-based detectors did not always match developers’ judgment when identifying code smells.
+
+\subsection{Machine Learning and Deep Learning Approaches}
+
+To overcome some of the limitations of rule-based detection, later studies introduced machine learning techniques for code smell detection. In these approaches, the problem was treated as a classification task in which models learned to distinguish between smelly and non-smelly code using labeled examples. Many early machine learning methods relied on handcrafted software metrics and used traditional classifiers such as Random Forests, Support Vector Machines, and decision trees.
+
+With the growth of deep learning, researchers began using models that learn patterns directly from source code instead of relying only on manually extracted metrics. Several neural network architectures, such as CNNs, LSTMs, BiLSTMs, and GNNs, were later applied to better capture both the structure and meaning of code. Compared with earlier metric-based approaches, these models reduced the amount of manual feature engineering required and showed improved capability in handling more complex code patterns \cite{mesbah2025nlp}.
+
+Research using the MLCQ dataset showed that pretrained code representations could improve code smell detection performance compared with traditional heuristic-based methods. Several studies reported that machine learning approaches achieved stronger performance than traditional metric-based detectors in multiple evaluation settings, supporting the idea that learned representations are more suitable for identifying complex smells.
+
+\subsection{NLP and Pretrained Language Models}
+
+Mesbah et al. compared several architectures, including LSTM, BiLSTM, and attention-based models, on smells such as Feature Envy, Data Class, Blob, and Long Method. Their experiments on the MLCQ dataset showed that BiLSTM models combined with attention mechanisms achieved stronger performance than simpler recurrent architectures in several smell categories.
+
+The study also experimented with pretrained transformer models, including CodeBERT, and compared them with other NLP-based approaches. The experiments showed that pretrained models performed well in some detection tasks without depending much on manually designed features. However, the results differed between smell types, since certain smells were easier for the models to identify than others. Other research explored embeddings generated from models such as code2vec, code2seq, CuBERT, CodeT5, and CodeBERT for representing source code in smell detection tasks \cite{mesbah2025nlp}.
+
+\subsection{Large Language Models and Parameter-Efficient Fine-Tuning}
+
+Large Language Models were later explored in several software engineering tasks, especially code generation and code summarization. Although these models showed strong general coding capabilities, earlier experiments on code smell detection reported weaker performance when the models were applied directly without task-specific training. This led researchers to study different fine-tuning approaches for improving smell detection results.
+
+One recent study investigated parameter-efficient fine-tuning (PEFT) methods for code smell detection. Zhang et al. introduced a source-code-centric benchmark containing Complex Conditional, Complex Method, Feature Envy, and Data Class smells, and evaluated PEFT techniques such as prompt tuning, prefix tuning, and LoRA. Their experiments showed that PEFT methods could match or sometimes outperform full fine-tuning while requiring fewer trainable parameters and lower GPU memory usage \cite{zhang2024peftsmells}.
+
+At the same time, newer open-source language model families such as Qwen3 provided smaller coding-oriented models that are more practical for limited computational environments. The Qwen3 series includes models ranging from 0.6B to 235B parameters and reported improvements on coding and reasoning benchmarks \cite{qwen32025report}.  
+

@@ -1,0 +1,16 @@
+\section{Dataset and Task Definition}
+\label{sec:dataset-task}
+
+\subsection{MLCQ Dataset}
+\label{subsec:mlcq-dataset}
+The dataset used in this study is \textbf{MLCQ}, an industry-relevant code smell dataset introduced by Madeyski and Lewowski \cite{madeyski2020mlcq}. The data were collected through a structured review process in which software developers assessed code samples extracted from actively developed Java open-source projects hosted on GitHub. Sample selection and review were supported by an acquisition tool developed by the authors, which presented either class-level or method-level code fragments to reviewers and recorded their assessments in a database. The data include four code smell types: Blob, Data Class, Feature Envy, and Long Method. The total number of samples is 4,770 collected from 523 projects and reviewed 14,739 times by 26 reviewers. Each record links a code sample with a smell type and its assigned label. The schema includes, among other fields, a sample identifier, reviewer identifier, smell type, severity label, review timestamp, sample type (class or method), code element name, and a link to the original source location. In this work, only the smell presence information is used, while the original severity annotations are converted into binary labels.
+
+\subsection{Smells Included}
+\label{subsec:smells-included}
+In this paper, we are focusing on the four code smell types from the MLCQ dataset: Blob, Data Class, Feature Envy, and Long Method.
+
+Blob and Data Class are class-level code smells, whereas Feature Envy and Long Method are method-level code smells. A Blob is a large class that accumulates too many responsibilities, while a Data Class mainly stores data and provides little meaningful behavior \cite{Jerzyk2023}. Feature Envy describes a method that appears to rely more on the data or functionality of another class than on those of its own class, whereas a Long Method is a method that becomes excessively large and therefore harder to understand, test, and maintain \cite{Jerzyk2023}.
+
+\subsection{Task Definition}
+\label{subsec:task-definition}
+The task considered in this study is binary code smell detection. As described later in Subsection~\ref{subsec:dataset}, each input is formed by combining a code sample from the dataset with a specific smell type. The model then determines whether that smell is present in the given sample. Because this study does not address the severity annotations available in the original dataset, the prediction space is limited to two labels: \textit{present} and \textit{absent}.

@@ -1,0 +1,70 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% Packages from the IEEE conference template.
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\pgfplotsset{compat=1.18}
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+  filecolor=black,
+  pdfborder={0 0 0}
+]{hyperref}
+
+% Bibliography setup.
+% Compile with Biber.
+\usepackage[style=ieee,backend=biber,sorting=none]{biblatex}
+\addbibresource{citations.bib}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{A Comparative Study of Fine-Tuned Lightweight LLMs for Automated Code Smell Detection}
+
+\author{
+\IEEEauthorblockN{Fatema Kotb, Ahmed Emad, Rofayda Bassem, Mahinour Elsarky, and Mostafa Abdelbarr}
+\IEEEauthorblockA{
+\textit{Computer Engineering Program, Faculty of Engineering, Cairo University}\\
+Cairo, Egypt\\
+\begin{tabular}{c}
+fatema.kotb02@eng-st.cu.edu.eg, ahmedemad8@gmail.com, rofaydabassem@gmail.com\\
+mahinouralaa2002@gmail.com, mostafa.abdelbrr@gmail.com
+\end{tabular}
+}
+}
+
+\maketitle
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+automated code smell detection, MLCQ, language models, LoRA, fine-tuning, F1-score
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_dataset_task_definition}
+\input{sections/03_related_work}
+\input{sections/04_methodology}
+\input{sections/05_results_discussion}
+\input{sections/06_conclusion}
+\input{sections/07_acknowledgment}
+\input{sections/08_appendix_training_config}
+
+\printbibliography
+
+\end{document}

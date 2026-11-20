@@ -1,0 +1,74 @@
+\section{Results and Discussion}
+\label{sec:results}
+
+\subsection{Overall Test Performance}
+\label{subsec:overall-test-performance}
+\begin{table}[h!]
+\centering
+\caption{Model performance on the test set using present-class precision, recall, and F1-score}
+\label{tab:model-performance}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\hline
+Qwen3-0.6B & 0.7790 & 0.5139 & 0.5584 & 0.5353 \\
+\hline
+Qwen3-1.7B & 0.7528 & 0.4755 & 0.8203 & 0.6021 \\
+\hline
+Llama-3.2-1B-Instruct & 0.7538 & 0.4632 & 0.5043 & 0.4829 \\
+\hline
+Gemma-3-1B-it & 0.7449 & 0.4614 & 0.7121 & 0.5600 \\
+\hline
+\end{tabular}
+\end{table}
+Code smell detection focuses on recall as an important metric because we want a model that can correctly identify actual code smells. However, precision is also important, since we do not want too many false alarms. Therefore, we rank the models primarily by their F1-score.
+Accuracy cannot be relied on as the main metric because of the class imbalance, with many more ``absent'' instances than ``present'' ones.
+As shown in Table~\ref{tab:model-performance}, Qwen3-1.7B achieves the highest overall F1-score, followed by Gemma-3-1B-it, Qwen3-0.6B, and Llama-3.2-1B-Instruct.
+The differences between the models are moderate, but the best-performing model may vary when performance is examined by code smell type, as shown in Table~\ref{tab:smell-type-f1}.
+
+\subsection{Performance by Code Smell Type}
+\label{subsec:performance-by-smell}
+To better understand model behavior across different smell categories, we compare the Present F1-score for each code smell type, as shown in Table~\ref{tab:smell-type-f1}.
+\textit{Qwen3-1.7B} achieves the best F1-score for Blob, Data Class, and Feature Envy, while \textit{Gemma-3-1B-it} performs best for Long Method. Overall, \textit{Qwen3-1.7B} is the strongest model in most cases, but the best-performing model changes slightly depending on the code smell type.
+
+\begin{table}[htbp]
+\centering
+\caption{Performance by code smell type using present-class F1-score}
+\label{tab:smell-type-f1}
+\small
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\hline
+\textbf{Model} & \textbf{Blob} & \textbf{Data Class} & \textbf{Feature Envy} & \textbf{Long Method} \\
+\hline
+Qwen3-0.6B & 0.4586 & 0.5260 & 0.2581 & 0.7953 \\
+Qwen3-1.7B & 0.6187 & 0.5371 & 0.3429 & 0.8333 \\
+Llama-3.2-1B-Instruct & 0.3922 & 0.4227 & 0.3143 & 0.7431 \\
+Gemma-3-1B-it & 0.5296 & 0.4970 & 0.2941 & 0.8369 \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Easiest and Hardest Code Smells}
+\label{subsec:easiest-hardest-smells}
+
+To identify which code smells are easier or harder to detect overall, we calculate the average Present F1-score for each smell type across all four models, as shown in Table~\ref{tab:average-smell-f1}.
+
+\begin{table}[h]
+\centering
+\caption{Average Present F1-score across models for each code smell type}
+\label{tab:average-smell-f1}
+\begin{tabular}{lc}
+\hline
+Smell Type & Average F1 Across Models \\
+\hline
+Blob & 0.499768 \\
+Data Class & 0.495689 \\
+Feature Envy & 0.302332 \\
+Long Method & 0.802143 \\
+\hline
+\end{tabular}
+\end{table}
+
+Long Method is the easiest code smell to detect overall, achieving the highest average F1-score of 0.802143. In contrast, Feature Envy was the hardest code smell to detect overall in our results  with the lowest average F1-score of 0.302332. This may be because identifying Feature Envy often requires broader structural and semantic context, such as understanding how a method interacts with other classes and whether its behavior is misplaced. The MLCQ data set suggests that highly severe cases are relatively rare, with only a small number of instances rated as critical by developers with industrial experience \cite{madeyski2020mlcq}.
